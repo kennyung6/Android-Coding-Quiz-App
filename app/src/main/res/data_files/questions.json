@@ -1,0 +1,37 @@
+{
+  "Hash Tables": [
+    {
+      "question" : "What is a collision?",
+      "choices" : [
+        "When your server is on a truck and it hits another truck.",
+        "When two hash tables hit each other while approaching the speed of light.",
+        "When two items hash to the same key value.",
+        "When two keys have the same data entry.",
+        "When someone overwrites a hash table with another hash table."
+      ],
+      "answer" : 2
+    },
+    {
+      "question" : "What are some possible ways to handle collisions?",
+      "choices" : [
+        "Don't bother; it won't ever happen.",
+        "Cry uncontrollably until someone smarter figures it out.",
+        "Marry Superman.",
+        "Use a linked list to hold all the values for each key with the same hash value.",
+        "Delete the hash table and start over. Never give up!"
+      ],
+      "answer" : 3
+    },
+    {
+      "question" : "What are the consequences of collisions?",
+      "choices" : [
+        "I'll have to answer questions about them in interviews and this god forsaken app.",
+        "When two hash tables collide at high speeds, they may create cancer-causing nano-hash-function particles.",
+        "You will have a slower insertion time. Worst case, it will be O(n^2).",
+        "You will have a slower insertion time. Worst case, it will be O(n).",
+        "Your family will reject for you being a failure to humanity."
+      ],
+      "answer" : 3
+    }
+  ]
+}
