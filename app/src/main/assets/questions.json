@@ -14,9 +14,9 @@
     {
       "question" : "What are some possible ways to handle collisions?",
       "choices" : [
-        "Don't bother; it won't ever happen.",
+        "Don't bother; it won't ever happen. ;)",
         "Cry uncontrollably until someone smarter figures it out.",
-        "Marry Superman.",
+        "Marry Superman. He can fix ANYTHING! But only if you're married to him and give birth to his mighty sperm-children. It's canon.",
         "Use a linked list to hold all the values for each key with the same hash value.",
         "Delete the hash table and start over. Never give up!"
       ],
