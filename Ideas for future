@@ -1,0 +1,23 @@
+Make different question difficulties and then have someone decide how hard they want the questions
+-maybe 3 tiers, easy medium and hard?
+-within a tier, the user will get random questions, and we'll keep track of which questions they've done already
+-for questions they've gotten wrong, the user should be able to go back and do them again, or look up explanations
+-for all questions users should be able to do this, but especially for those they've gotten wrong. 
+-should we include an "I dunno" button so that a user can avoid guessing so they can easily go back to that question?
+
+summary page:
+-after a user does a bunch of questions, the user can see how well they did (# right/wrong)
+-if certain questions are not answered correctly, we can have links to pages that give more information about what the question asked
+-the user should be able to look up information for questions they did answer correctly if they guessed.
+-if we implement an "I dunno" button, then the user can have that as a section/statistic in the summary page
+-this sort of page should be accessible from main page about general past progress (not just recent questions answered)
+-maybe we could also organize the info based on what day the user did questions 
+-or maybe instead have general "use sessions" where the user did questions for an hour then wanted to stop? which?
+
+Implementation page:
+-this is super future todo
+-since in real life coding jobs and interviews, you have to actually CODE, we should have sample coding/implementation questions
+-however, I don't want to tell the user "good job you did it right" I would prefer the user just did their own code and then we can have a suggested answer
+-if we hate the user, we can give only P/NP questions and tell the user to solve it in O(log(n)) time. 
+-also, if we don't like the user, we can give problems that are super easy and then say it's impossible to get better than O(n!) time
+-ex: you have a heap, and you want the biggest/smallest #. How do you solve? YOU CAN'T! DEATH TO EVERYONE NO SUCCESS POSSIBLE ONLY THE FAIL
