@@ -22,11 +22,7 @@ public class HashTableQuestions extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hash_table_questions);
 
-        try {
-            testJson();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        writeQuestion();
     }
 
     @Override
@@ -55,6 +51,13 @@ public class HashTableQuestions extends ActionBarActivity {
     //TODO: keep track of which questions have been answered that works after app has been closed and turned off (write to file!)
     //TODO: come up with a way to find which question to ask next. random? sequential?
 
+    public void writeQuestion() {
+        try {
+            testJson();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void testJson() throws JSONException {
         TextView testView = (TextView) findViewById(R.id.Question);
