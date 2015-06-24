@@ -1,7 +1,7 @@
 package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioButton;
@@ -14,8 +14,18 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
+/*
+ * Created by Devin Wakefield on June 7, 2015
+ *
+ * This class is a temporary activity to get a basic setup running. This will ask questions of the
+ * user about hash tables, that has been stored as an asset as questions.json. Eventually, I hope
+ * that I can make a generalized activity that can be told which topic has been chosen, so that
+ * I only need one activity for all topics. The topic will be decided by the user, and this
+ * generalized activity will get the questions about that topic based on the user input.
+ *
+ */
 
-public class HashTableQuestions extends ActionBarActivity {
+public class HashTableQuestions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +70,13 @@ public class HashTableQuestions extends ActionBarActivity {
     }
 
     public void testJson() throws JSONException {
+        // get textview so I can put in the question
         TextView testView = (TextView) findViewById(R.id.Question);
         String json = loadJSONFromAsset();
-        //testView.setText(json);
+
 
         //TODO: is there a better way to do this programmatically?
-
+        //Get all of the RadioButtons
         RadioButton a1 = (RadioButton) findViewById(R.id.a1);
         RadioButton a2 = (RadioButton) findViewById(R.id.a2);
         RadioButton a3 = (RadioButton) findViewById(R.id.a3);
@@ -76,14 +87,17 @@ public class HashTableQuestions extends ActionBarActivity {
 
 
 
+        //get the question
         JSONArray hash_table_Qs = obj.getJSONArray("Hash Tables");
         String firstQuestion = hash_table_Qs.getJSONObject(0).getString("question");
         testView.setText(firstQuestion);
 
+        //get the choices to answering the question into JSONArray
         JSONArray q1_answers = hash_table_Qs.getJSONObject(0).getJSONArray("choices");
 
 
         //TODO: again, can I do this automatically?
+        //fill radio buttons with the choices
         a1.setText(q1_answers.getString(0));
         a2.setText(q1_answers.getString(1));
         a3.setText(q1_answers.getString(2));
@@ -97,13 +111,13 @@ public class HashTableQuestions extends ActionBarActivity {
         try {
 
             InputStream is = getAssets().open("questions.json");
-
             int size = is.available();
-
             byte[] buffer = new byte[size];
+            int rsz = is.read(buffer);
 
-            is.read(buffer);
-
+            if(rsz <0 ){
+                //there is a big problem and I don't know what to do
+            }
             is.close();
 
             json = new String(buffer, "UTF-8");
