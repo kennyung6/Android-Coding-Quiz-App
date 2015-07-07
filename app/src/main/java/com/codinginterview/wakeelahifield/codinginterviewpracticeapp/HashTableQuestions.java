@@ -75,6 +75,7 @@ public class HashTableQuestions extends AppCompatActivity {
         String json = loadJSONFromAsset();
 
 
+
         //TODO: is there a better way to do this programmatically?
         //Get all of the RadioButtons
         RadioButton a1 = (RadioButton) findViewById(R.id.a1);
@@ -82,6 +83,7 @@ public class HashTableQuestions extends AppCompatActivity {
         RadioButton a3 = (RadioButton) findViewById(R.id.a3);
         RadioButton a4 = (RadioButton) findViewById(R.id.a4);
         RadioButton a5 = (RadioButton) findViewById(R.id.a5);
+
 
         JSONObject obj = new JSONObject(json);
 

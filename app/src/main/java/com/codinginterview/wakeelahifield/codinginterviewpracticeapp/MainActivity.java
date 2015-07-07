@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void to_topics(View view){
-        Intent intent = new Intent(this, Topics.class);
+        Intent intent = new Intent(this, TopicActivity.class);
         startActivity(intent);
 
     }
