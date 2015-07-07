@@ -1,3 +1,5 @@
+package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ public class Topic {
 
 
     /*
-     * Constructor for a Topic. A topic holds an array of questions.
+     * Constructor for a com.codinginterview.wakeelahifield.codinginterviewpracticeapp.Topic. A topic holds an array of questions.
      *
      * HAS NOT BEEN TESTED YET
      * TODO: TEST THIS SHIT

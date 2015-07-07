@@ -1,3 +1,5 @@
+package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

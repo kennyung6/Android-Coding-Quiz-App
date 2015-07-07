@@ -1,3 +1,5 @@
+package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
+
 /**
  * Created by Devin on 6/17/2015.
  *
