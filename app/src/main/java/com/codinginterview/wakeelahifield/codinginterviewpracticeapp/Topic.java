@@ -46,16 +46,16 @@ public class Topic {
             e.printStackTrace();
         }
         qIndex = 0;
-        shuffleQuestions();
+//        shuffleQuestions();
     }
 
-    private void shuffleQuestions() throws IllegalStateException{
-        if(questions.size() < 1){
-            throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
-        }
-        shuffledQs = Arrays.asList((Question [] )questions.toArray());
-        Collections.shuffle(shuffledQs);
-    }
+//    private void shuffleQuestions() throws IllegalStateException{
+//        if(questions.size() < 1){
+//            throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
+//        }
+//        shuffledQs = Arrays.asList((Question [] )questions.toArray());
+//        Collections.shuffle(shuffledQs);
+//    }
 
     public Question GetRandomQuestion() throws IllegalStateException{
         //for this, I'm not assuming questions is not empty. If it is empty, nothing will work but someone should find out somehow
@@ -65,5 +65,11 @@ public class Topic {
         Question newQuestion = shuffledQs.get(qIndex);
         qIndex++;
         return newQuestion;
+    }
+
+    // Will be used by the ArrayAdapter in the ListView
+    @Override
+    public String toString() {
+        return topic;
     }
 }

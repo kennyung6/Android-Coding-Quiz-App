@@ -1,15 +1,13 @@
 package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,12 +23,12 @@ import java.io.InputStream;
  *
  */
 
-public class HashTableQuestions extends AppCompatActivity {
+public class QuestionsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hash_table_questions);
+        setContentView(R.layout.activity_questions);
 
         writeQuestion();
     }
@@ -70,8 +68,14 @@ public class HashTableQuestions extends AppCompatActivity {
     }
 
     public void testJson() throws JSONException {
-        // get textview so I can put in the question
-        TextView testView = (TextView) findViewById(R.id.Question);
+        // get question textview thing so I can put in the question
+        TextView TopicText = (TextView) findViewById(R.id.title);
+        Intent intent = getIntent();
+
+        TopicText.setText(intent.getStringExtra("topic_name"));
+
+        TextView questionText = (TextView) findViewById(R.id.Question);
+        /*
         String json = loadJSONFromAsset();
 
 
@@ -105,6 +109,7 @@ public class HashTableQuestions extends AppCompatActivity {
         a3.setText(q1_answers.getString(2));
         a4.setText(q1_answers.getString(3));
         a5.setText(q1_answers.getString(4));
+        */
 
     }
 

@@ -3,15 +3,14 @@ package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,7 +72,7 @@ public class TopicActivity extends ListActivity {
     }
 
     public void to_hashTables(View view){
-        Intent intent = new Intent(this, HashTableQuestions.class);
+        Intent intent = new Intent(this, QuestionsActivity.class);
         startActivity(intent);
     }
 
@@ -84,18 +83,36 @@ public class TopicActivity extends ListActivity {
             JSONArray topics = new JSONArray(json);
 
             List<Topic> topicList = new ArrayList<Topic>();
-            for(int i = 0; i < topics.length(); i++){
 
+            for(int i = 0; i < topics.length(); i++){
+                //TODO: discuss if it is inneficient to make objects out of everything, then store them in the database... will I use the objects I make here? This seems like a waste...
+                Topic newTopic = new Topic(topics.getJSONObject(i));
+                topicList.add(newTopic);
+                addTopicToDatabase(newTopic);
             }
+
+            ArrayAdapter<Topic> adapter = new ArrayAdapter<Topic>(this,
+                    android.R.layout.simple_list_item_1, topicList);
+            setListAdapter(adapter);
 
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
     }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        //do something here using the position in the array
+        //Log.d("############", "clicked on position " + position + " which has this string: " + getListAdapter().getItem(position).toString());
+        Intent intent = new Intent(this, QuestionsActivity.class);
+        intent.putExtra("topic_name", getListAdapter().getItem(position).toString());
+        startActivity(intent);
+    }
+
+
 
     public String loadJSONFromAsset() throws IOException{
         String json;
@@ -104,12 +121,10 @@ public class TopicActivity extends ListActivity {
             InputStream is = getAssets().open("questions.json");
             int size = is.available();
             byte[] buffer = new byte[size];
-            int rsz = is.read(buffer);
+            int readSize = is.read(buffer);
 
-            if(rsz <0 ){
-                //there is a big problem and I don't know what to do
-                IOException e = new IOException("Could not read from buffer");
-                throw e;
+            if(readSize <0 ){
+                //end of input stream
             }
             is.close();
 
@@ -125,7 +140,28 @@ public class TopicActivity extends ListActivity {
     }
 
 
-    public void setButton(){
+    public void addTopicToDatabase(Topic topic){
+        TopicDBManager topicDB = new TopicDBManager(this);
+        QuestionDBManager quesDB = new QuestionDBManager(this);
+        try{
+            //open database and make it possible to be used.
+            // Also note these 2 lines are why we are in a try/catch
+            topicDB.open();
+            quesDB.open();
+
+            //obviously, insert topic into DB
+            topicDB.insertTopic(topic.toString());
+
+            List<Question> questions = topic.questions;
+            for (int i = 0; i < questions.size(); i++){
+                quesDB.insertQuestion(questions.get(i), topic.toString());
+            }
+
+            topicDB.close();
+            quesDB.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 //        Button button = (Button) findViewById(R.id.hash_table);
 //
 //        TopicDBManager topicDB = new TopicDBManager(this);

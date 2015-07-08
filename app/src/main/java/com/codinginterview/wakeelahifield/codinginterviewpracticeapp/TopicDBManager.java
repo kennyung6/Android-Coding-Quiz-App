@@ -28,21 +28,14 @@ public class TopicDBManager {
 
     public void open() throws SQLException{
         db = dbHelper.getWritableDatabase();
-        int tmp = 1+1;
-        tmp++;
         if(db == null)
         {
-            SQLException e = new SQLException("database is null");
-            throw e;
+            throw new SQLException("database is null");
         }
     }
 
     public void close(){
         dbHelper.close();
-    }
-
-    public String getTableName(){
-        return SQLiteDBHelper.TOPIC_TABLE_NAME;
     }
 
     public void insertTopic(String topicName){

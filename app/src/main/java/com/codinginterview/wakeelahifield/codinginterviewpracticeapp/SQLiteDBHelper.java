@@ -7,13 +7,13 @@ import android.util.Log;
 
 /**
  * Created by Devin on 6/23/2015.
+ *
+ * The Helper Database Class. Considering consolidating all the database operations into this class, although it would be nice to be have separation for better organization.
  */
     public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "QuizDatabase.db";
     public static final int DATABASE_VERSION = 1;
-    private TopicDBManager topicTable;
-    private QuestionDBManager questionTable;
 
     //basic table information I need
     protected static final String TOPIC_TABLE_NAME = "TopicTable";
@@ -23,7 +23,7 @@ import android.util.Log;
     //the SQL code for creating this table:
     private static final String CREATE_TOPIC_TABLE = "CREATE TABLE IF NOT EXISTS " + TOPIC_TABLE_NAME + "( " +
             ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            TOPIC_COL + " TEXT" +
+            TOPIC_COL + " TEXT NOT NULL UNIQUE" +
             ");";
 
 
@@ -40,9 +40,9 @@ import android.util.Log;
 
     private static final String CREATE_QUESTION_TABLE = "CREATE TABLE IF NOT EXISTS " + QUESTION_TABLE_NAME + "(" +
             ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            QUESTION_COL + " TEXT, " +
-            CHOICES_COL + " TEXT, " +
-            ANSWER_COL + " TINYINT, " +
+            QUESTION_COL + " TEXT NOT NULL UNIQUE, " +
+            CHOICES_COL + " TEXT NOT NULL, " +
+            ANSWER_COL + " TINYINT NOT NULL, " +
             TOPIC_ID + " INTEGER, " +
             "FOREIGN KEY(" +TOPIC_ID + ") REFERENCES " + TOPIC_TABLE_NAME + "(" + ID_COL + ")" +
             ")  ;";
@@ -66,7 +66,7 @@ import android.util.Log;
         Log.w(SQLiteDBHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data.");
 
         //there must be a way to do this in one line, but this was it's also better because I might get rid of a table later on then I just have to delete a line. So. who knows.
-        db.execSQL("DROP TABLE IF EXISTS " + topicTable.getTableName());
-        db.execSQL("DROP TABLE IF EXISTS " + questionTable.getTableName());
+        db.execSQL("DROP TABLE IF EXISTS " + TOPIC_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + QUESTION_TABLE_NAME);
     }
 }

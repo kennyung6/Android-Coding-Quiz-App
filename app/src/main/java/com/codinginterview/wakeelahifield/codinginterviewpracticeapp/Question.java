@@ -13,7 +13,7 @@ import java.util.Arrays;
  * This class is intended to hold a _question, hold the possible choices for answering the _question,
  * and which choice is the correct answer.
  *
- * Intended to be used by HashTableQuestions, and, in future, whichever activity will be the
+ * Intended to be used by QuestionsActivity, and, in future, whichever activity will be the
  * generalized activity where questions are asked of the user.
  */
 public class Question {

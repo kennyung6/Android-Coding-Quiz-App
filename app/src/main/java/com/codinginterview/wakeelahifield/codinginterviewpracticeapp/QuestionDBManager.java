@@ -35,12 +35,6 @@ public class QuestionDBManager {
         dbHelper.close();
     }
 
-
-    public String getTableName(){
-        return SQLiteDBHelper.QUESTION_TABLE_NAME;
-    }
-
-
     //since I have two insert question things, most of which are the following function, why have same code in two spots when I can do this?
     private ContentValues getQuestionData(Question question){
         ContentValues values = new ContentValues();
