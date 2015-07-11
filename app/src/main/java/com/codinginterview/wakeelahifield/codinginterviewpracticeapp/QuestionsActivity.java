@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /*
  * Created by Devin Wakefield on June 7, 2015
@@ -71,10 +73,45 @@ public class QuestionsActivity extends AppCompatActivity {
         // get question textview thing so I can put in the question
         TextView TopicText = (TextView) findViewById(R.id.title);
         Intent intent = getIntent();
+        String topicName = intent.getStringExtra("topic_name");
 
-        TopicText.setText(intent.getStringExtra("topic_name"));
+        TopicText.setText(topicName);
 
         TextView questionText = (TextView) findViewById(R.id.Question);
+
+        DBManager db = new DBManager(this);
+        try{
+            db.open();
+
+            RadioButton a1 = (RadioButton) findViewById(R.id.a1);
+            RadioButton a2 = (RadioButton) findViewById(R.id.a2);
+            RadioButton a3 = (RadioButton) findViewById(R.id.a3);
+            RadioButton a4 = (RadioButton) findViewById(R.id.a4);
+            RadioButton a5 = (RadioButton) findViewById(R.id.a5);
+
+            List<Question> questions = db.getQuestionOfTopic(topicName);
+
+            Topic theTopic = new Topic(topicName, questions);
+
+            Question aQuestion = theTopic.getRandomQuestion();
+
+            questionText.setText(aQuestion.get_question());
+
+            String[] choices = new String[aQuestion.getChoices().size()];
+            choices = aQuestion.getChoices().toArray(choices);
+
+            a1.setText(choices[0]);
+            a2.setText(choices[1]);
+            a3.setText(choices[2]);
+            a4.setText(choices[3]);
+            a5.setText(choices[4]);
+
+
+
+            db.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         /*
         String json = loadJSONFromAsset();
 

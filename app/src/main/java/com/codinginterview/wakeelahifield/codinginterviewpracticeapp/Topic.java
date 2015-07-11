@@ -16,7 +16,7 @@ import java.util.List;
  * for that topic.
  */
 public class Topic {
-    ArrayList<Question> questions;
+    List<Question> questions;
     String topic;
     List<Question> shuffledQs;
     int qIndex;
@@ -46,18 +46,25 @@ public class Topic {
             e.printStackTrace();
         }
         qIndex = 0;
-//        shuffleQuestions();
+        shuffleQuestions();
     }
 
-//    private void shuffleQuestions() throws IllegalStateException{
-//        if(questions.size() < 1){
-//            throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
-//        }
-//        shuffledQs = Arrays.asList((Question [] )questions.toArray());
-//        Collections.shuffle(shuffledQs);
-//    }
+    public Topic (String topic, List<Question> newQuestions){
+        this.questions = newQuestions;
+        this.topic = topic;
+        qIndex = 0;
+        shuffleQuestions();
+    }
 
-    public Question GetRandomQuestion() throws IllegalStateException{
+    private void shuffleQuestions() throws IllegalStateException{
+        if(questions.size() < 1){
+            throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
+        }
+        shuffledQs = questions;
+        Collections.shuffle(shuffledQs);
+    }
+
+    public Question getRandomQuestion() throws IllegalStateException{
         //for this, I'm not assuming questions is not empty. If it is empty, nothing will work but someone should find out somehow
         if(shuffledQs.size() <1){
             throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);

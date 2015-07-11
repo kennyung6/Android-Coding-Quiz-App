@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TopicActivity extends ListActivity {
 
-    TopicDBManager topicDB;
+    DBManager topicDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class TopicActivity extends ListActivity {
 
 
         //the database! it works! yay!
-        topicDB = new TopicDBManager(this);
+        topicDB = new DBManager(this);
 
         //now I have to open it :P
         try{
@@ -141,30 +141,30 @@ public class TopicActivity extends ListActivity {
 
 
     public void addTopicToDatabase(Topic topic){
-        TopicDBManager topicDB = new TopicDBManager(this);
-        QuestionDBManager quesDB = new QuestionDBManager(this);
+        DBManager topicDB = new DBManager(this);
+        //QuestionDBManager quesDB = new QuestionDBManager(this);
         try{
             //open database and make it possible to be used.
             // Also note these 2 lines are why we are in a try/catch
             topicDB.open();
-            quesDB.open();
+         //   quesDB.open();
 
             //obviously, insert topic into DB
             topicDB.insertTopic(topic.toString());
 
             List<Question> questions = topic.questions;
             for (int i = 0; i < questions.size(); i++){
-                quesDB.insertQuestion(questions.get(i), topic.toString());
+                topicDB.insertQuestion(questions.get(i), topic.toString());
             }
 
             topicDB.close();
-            quesDB.close();
+         //   quesDB.close();
         }catch (Exception e){
             e.printStackTrace();
         }
 //        Button button = (Button) findViewById(R.id.hash_table);
 //
-//        TopicDBManager topicDB = new TopicDBManager(this);
+//        DBManager topicDB = new DBManager(this);
 //        try{
 //            topicDB.open();
 //        }catch (Exception e){

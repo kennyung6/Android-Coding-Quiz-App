@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Topics"
+            android:name=".TopicActivity"
             android:label="@string/title_activity_topics" >
         </activity>
         <activity
-            android:name=".HashTableQuestions"
+            android:name=".QuestionsActivity"
             android:label="@string/title_activity_hash_table_questions" >
         </activity>
     </application>

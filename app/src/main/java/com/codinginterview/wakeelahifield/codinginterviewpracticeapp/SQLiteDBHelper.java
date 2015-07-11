@@ -68,5 +68,8 @@ import android.util.Log;
         //there must be a way to do this in one line, but this was it's also better because I might get rid of a table later on then I just have to delete a line. So. who knows.
         db.execSQL("DROP TABLE IF EXISTS " + TOPIC_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QUESTION_TABLE_NAME);
+
+        db.execSQL(CREATE_TOPIC_TABLE);
+        db.execSQL(CREATE_QUESTION_TABLE);
     }
 }
