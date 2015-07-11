@@ -152,7 +152,7 @@ public class DBManager {
         return questions;
     }
 
-    public List<Question> getQuestionOfTopic(String topicName){
+    public List<Question> getQuestionsFromTopic(String topicName){
 
 
         int topicID = getTopicID(topicName);

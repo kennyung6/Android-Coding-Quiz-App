@@ -89,7 +89,7 @@ public class QuestionsActivity extends AppCompatActivity {
             RadioButton a4 = (RadioButton) findViewById(R.id.a4);
             RadioButton a5 = (RadioButton) findViewById(R.id.a5);
 
-            List<Question> questions = db.getQuestionOfTopic(topicName);
+            List<Question> questions = db.getQuestionsFromTopic(topicName);
 
             Topic theTopic = new Topic(topicName, questions);
 
