@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">CodingInterviewPracticeApp</string>
+    <string name="app_name">Coding Interview Practice</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Topics covered in the App -->
+    <string name="algos">Algorithms</string>
+    <string name="data_struct">Data Structures</string>
+    <string name="ooa">Object-oriented</string>
 </resources>
