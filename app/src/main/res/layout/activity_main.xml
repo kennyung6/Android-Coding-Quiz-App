@@ -3,24 +3,64 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#8136ff5a">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/app_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:linksClickable="false"/>
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/quiz_topics">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/data_struct_topic"
+            android:text="@string/data_struct"
+            android:layout_below="@+id/app_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="52dp"
+            android:checked="false"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/algos"
+            android:id="@+id/algo_topic"
+            android:layout_below="@+id/data_struct_topic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="52dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ooa"
+            android:id="@+id/ooa_topic"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="52dp"/>
+    </RadioGroup>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/to_topics"
-        android:text="@string/to_topics_button"
-        android:onClick="to_topics"
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/to_settings"
-        android:text="@string/to_settings_button"
-        android:layout_below="@id/to_topics"
-        />
-
+        android:text="@string/submit_topic"
+        android:id="@+id/start_quiz"
+        android:layout_marginTop="94dp"
+        android:layout_below="@+id/quiz_topics"
+        android:layout_alignRight="@+id/quiz_topics"
+        android:layout_alignEnd="@+id/quiz_topics"/>
 </RelativeLayout>
