@@ -154,7 +154,6 @@ public class DBManager {
 
     public List<Question> getQuestionsFromTopic(String topicName){
 
-
         int topicID = getTopicID(topicName);
 
         Cursor cursor = db.query(
@@ -168,6 +167,61 @@ public class DBManager {
         cursor.close();
         return questions;
     }
+
+    public int getQuestionID(Question question){
+        int id;
+
+        Cursor cursor = db.query(
+                SQLiteDBHelper.QUESTION_TABLE_NAME,
+                new String[] {SQLiteDBHelper.ID_COL},
+                SQLiteDBHelper.QUESTION_COL + " = \"" + question.get_question() + "\"",
+                null, null, null, null);
+
+        cursor.moveToFirst();
+        id = cursor.getColumnIndex(SQLiteDBHelper.ID_COL);
+        cursor.close();
+
+        return id;
+    }
+
+
+    /*
+     * HISTORY TABLE MANAGEMENT DEFINITIONS HERE
+     * The history table is used to keep track of the user's history and all that stuff. woo
+     */
+
+    /*blah blah
+            hahahha
+    ahdkjflska
+                    dklsjflksdjakldfa*/
+
+    public void addToHistory(Question question, int userAnswer){
+        int id = getQuestionID(question);
+
+        ContentValues values = new ContentValues();
+        values.put(SQLiteDBHelper.USER_ANSW_COL, userAnswer);
+        values.put(SQLiteDBHelper.QUESTION_ID_COL, id);
+        if(userAnswer == question.getAnswerIndex()){
+            values.put(SQLiteDBHelper.GOT_RIGHT_COL, 1);
+        } else {
+            values.put(SQLiteDBHelper.GOT_RIGHT_COL, 0);
+        }
+        db.insert(SQLiteDBHelper.HISTORY_TABLE_NAME, null, values);
+    }
+
+
+    public void getQuestionHistory(Question question){
+        int id = getQuestionID(question);
+
+        Cursor cursor = db.query(
+                SQLiteDBHelper.HISTORY_TABLE_NAME,
+                new String[] {SQLiteDBHelper.USER_ANSW_COL, SQLiteDBHelper.GOT_RIGHT_COL},
+                SQLiteDBHelper.ID_COL + " = \"" + id + "\"",
+                null, null, null, null);
+
+        //TODO: make a "history" object that can store all this in an arraylist or something
+    }
+
 
 
 }

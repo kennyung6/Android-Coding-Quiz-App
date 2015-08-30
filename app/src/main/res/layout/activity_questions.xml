@@ -116,4 +116,15 @@
             />
     </RadioGroup>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Question!"
+        android:id="@+id/nextQuestionButton"
+        android:layout_below="@+id/answers"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:onClick="nextQuestion"
+        />
+
 </RelativeLayout>

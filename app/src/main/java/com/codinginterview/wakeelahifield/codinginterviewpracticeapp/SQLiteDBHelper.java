@@ -13,7 +13,7 @@ import android.util.Log;
     public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "QuizDatabase.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     //basic table information I need
     protected static final String TOPIC_TABLE_NAME = "TopicTable";
@@ -48,6 +48,20 @@ import android.util.Log;
             ")  ;";
 
 
+    //HISTORY TABLE STRINGS & DEFINITIONS
+    //this table is to track how well the user has been over the past whatever
+
+    protected static final String HISTORY_TABLE_NAME = "HistoryTable";
+    protected static final String QUESTION_ID_COL = "q_id";
+    protected static final String USER_ANSW_COL = "user_answer";
+    protected static final String GOT_RIGHT_COL = "got_right";
+
+    private static final String CREATE_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS " + HISTORY_TABLE_NAME + "(" +
+            ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            USER_ANSW_COL + " INTEGER NOT NULL, " +
+            GOT_RIGHT_COL + " INTEGER DEFAULT 0, " +
+            "FOREIGN KEY(" + QUESTION_ID_COL + ") REFERENCES " + QUESTION_TABLE_NAME + "(" + ID_COL + ")" +
+            ");";
 
 
     public SQLiteDBHelper(Context context){
@@ -60,6 +74,7 @@ import android.util.Log;
         //topic table has to be created first because the question table depends upon it. the question table has a foreign key from the table topic.
         database.execSQL(CREATE_TOPIC_TABLE);
         database.execSQL(CREATE_QUESTION_TABLE);
+        database.execSQL(CREATE_HISTORY_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -68,8 +83,10 @@ import android.util.Log;
         //there must be a way to do this in one line, but this was it's also better because I might get rid of a table later on then I just have to delete a line. So. who knows.
         db.execSQL("DROP TABLE IF EXISTS " + TOPIC_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + QUESTION_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
 
         db.execSQL(CREATE_TOPIC_TABLE);
         db.execSQL(CREATE_QUESTION_TABLE);
+        db.execSQL(CREATE_HISTORY_TABLE);
     }
 }

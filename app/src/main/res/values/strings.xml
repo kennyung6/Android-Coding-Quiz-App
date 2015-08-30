@@ -4,10 +4,12 @@
     <string name="action_settings">Settings</string>
     <string name="to_topics_button">List Topics</string>
     <string name="to_settings_button">Settings</string>
+    <string name="to_test_button">Testing</string>
     <string name="title_activity_topics">Topics</string>
     <string name="hash_table_topic">Hash Tables!</string>
     <string name="title_activity_hash_table_questions">HashTableQuestions</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

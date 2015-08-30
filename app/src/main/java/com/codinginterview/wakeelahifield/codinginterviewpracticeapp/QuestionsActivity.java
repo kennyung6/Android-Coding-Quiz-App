@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /*
@@ -27,12 +26,25 @@ import java.util.List;
 
 public class QuestionsActivity extends AppCompatActivity {
 
+    RadioButton a1;
+    RadioButton a2;
+    RadioButton a3;
+    RadioButton a4;
+    RadioButton a5;
+
+    RadioGroup choices;
+
+    TextView questionText;
+    List<Question> questions;
+    Topic theTopic;
+    Question currQuestion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        writeQuestion();
+        initialize();
     }
 
     @Override
@@ -57,98 +69,84 @@ public class QuestionsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO: make it so that it can switch from one question to the next after being answered.
-    //TODO: keep track of which questions have been answered that works after app has been closed and turned off (write to file!)
-    //TODO: come up with a way to find which question to ask next. random? sequential?
 
-    public void writeQuestion() {
-        try {
-            testJson();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void testJson() throws JSONException {
+    public void initialize() {
         // get question textview thing so I can put in the question
         TextView TopicText = (TextView) findViewById(R.id.title);
         Intent intent = getIntent();
         String topicName = intent.getStringExtra("topic_name");
+        choices = (RadioGroup) findViewById(R.id.answers);
 
         TopicText.setText(topicName);
 
-        TextView questionText = (TextView) findViewById(R.id.Question);
+        questionText = (TextView) findViewById(R.id.Question);
 
         DBManager db = new DBManager(this);
         try{
             db.open();
 
-            RadioButton a1 = (RadioButton) findViewById(R.id.a1);
-            RadioButton a2 = (RadioButton) findViewById(R.id.a2);
-            RadioButton a3 = (RadioButton) findViewById(R.id.a3);
-            RadioButton a4 = (RadioButton) findViewById(R.id.a4);
-            RadioButton a5 = (RadioButton) findViewById(R.id.a5);
+            a1 = (RadioButton) findViewById(R.id.a1);
+            a2 = (RadioButton) findViewById(R.id.a2);
+            a3 = (RadioButton) findViewById(R.id.a3);
+            a4 = (RadioButton) findViewById(R.id.a4);
+            a5 = (RadioButton) findViewById(R.id.a5);
 
-            List<Question> questions = db.getQuestionsFromTopic(topicName);
+            questions = db.getQuestionsFromTopic(topicName);
 
-            Topic theTopic = new Topic(topicName, questions);
+            theTopic = new Topic(topicName, questions);
 
-            Question aQuestion = theTopic.getRandomQuestion();
-
-            questionText.setText(aQuestion.get_question());
-
-            String[] choices = new String[aQuestion.getChoices().size()];
-            choices = aQuestion.getChoices().toArray(choices);
-
-            a1.setText(choices[0]);
-            a2.setText(choices[1]);
-            a3.setText(choices[2]);
-            a4.setText(choices[3]);
-            a5.setText(choices[4]);
-
-
+            writeRandomQuestion();
 
             db.close();
-        }catch (Exception e){
+        }catch (java.sql.SQLException e){
             e.printStackTrace();
         }
-        /*
-        String json = loadJSONFromAsset();
+    }
 
+    //TODO: keep track of which questions have been answered that works after app has been closed and turned off (write to file!)
+    public void writeRandomQuestion(){
 
+        currQuestion = theTopic.getRandomQuestion();
 
-        //TODO: is there a better way to do this programmatically?
-        //Get all of the RadioButtons
-        RadioButton a1 = (RadioButton) findViewById(R.id.a1);
-        RadioButton a2 = (RadioButton) findViewById(R.id.a2);
-        RadioButton a3 = (RadioButton) findViewById(R.id.a3);
-        RadioButton a4 = (RadioButton) findViewById(R.id.a4);
-        RadioButton a5 = (RadioButton) findViewById(R.id.a5);
+        questionText.setText(currQuestion.get_question());
 
+        String[] choices = new String[currQuestion.getChoices().size()];
+        choices = currQuestion.getChoices().toArray(choices);
 
-        JSONObject obj = new JSONObject(json);
-
-
-
-        //get the question
-        JSONArray hash_table_Qs = obj.getJSONArray("Hash Tables");
-        String firstQuestion = hash_table_Qs.getJSONObject(0).getString("question");
-        testView.setText(firstQuestion);
-
-        //get the choices to answering the question into JSONArray
-        JSONArray q1_answers = hash_table_Qs.getJSONObject(0).getJSONArray("choices");
-
-
-        //TODO: again, can I do this automatically?
-        //fill radio buttons with the choices
-        a1.setText(q1_answers.getString(0));
-        a2.setText(q1_answers.getString(1));
-        a3.setText(q1_answers.getString(2));
-        a4.setText(q1_answers.getString(3));
-        a5.setText(q1_answers.getString(4));
-        */
+        a1.setText(choices[0]);
+        a2.setText(choices[1]);
+        a3.setText(choices[2]);
+        a4.setText(choices[3]);
+        a5.setText(choices[4]);
 
     }
+
+    public void nextQuestion(View view){
+
+
+//        Toast toast;
+        //you have to divide indexOfChild() by two because the lines in the UI are counted, and this way it just works out.
+        if (currQuestion.getAnswerIndex() == (choices.indexOfChild(choices.findViewById(choices.getCheckedRadioButtonId())))/2 ) {
+//            user got the question right! yay!
+//            toast = Toast.makeText(getApplicationContext(), "Yay you did a thing, I guess? meh.", Toast.LENGTH_SHORT);
+
+            //need to mark somewhere that the question was answered correctly
+        } else {
+//            user is WRONG WRONG WRONG OH MY GOODNESS SO SCARY <\3
+//            toast = Toast.makeText(getApplicationContext(), "WRONG OMG YOU\'RE WRONG HOW COULD YOU WE ALL BELIEVED IN YOU BUT NOW WE\'RE ATHEISTS!!!", Toast.LENGTH_SHORT);
+        }
+//        toast = Toast.makeText(getApplicationContext(),
+//                "you checked " + choices.indexOfChild(choices.findViewById(choices.getCheckedRadioButtonId()))/2 + " and the answer was " + currQuestion.getAnswerIndex(),
+//                Toast.LENGTH_LONG);
+//        toast.show();
+
+        writeRandomQuestion();
+    }
+
+    /*
+
+    Don't need anymore
 
     public String loadJSONFromAsset() {
         String json;
@@ -174,5 +172,6 @@ public class QuestionsActivity extends AppCompatActivity {
         return json;
 
     }
+    */
 
 }
