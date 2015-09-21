@@ -39,6 +39,8 @@ public class QuestionsActivity extends AppCompatActivity {
     Topic theTopic;
     Question currQuestion;
 
+    DBManager db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +84,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         questionText = (TextView) findViewById(R.id.Question);
 
-        DBManager db = new DBManager(this);
+        db = new DBManager(this);
         try{
             db.open();
 
@@ -124,54 +126,28 @@ public class QuestionsActivity extends AppCompatActivity {
 
     public void nextQuestion(View view){
 
+//      you have to divide indexOfChild() by two because the lines in the UI are counted, and this way it just works out.
+        int userChoice = choices.indexOfChild(choices.findViewById(choices.getCheckedRadioButtonId()))/2;
+        boolean gotRight = currQuestion.getAnswerIndex() == userChoice;
 
-//        Toast toast;
-        //you have to divide indexOfChild() by two because the lines in the UI are counted, and this way it just works out.
-        if (currQuestion.getAnswerIndex() == (choices.indexOfChild(choices.findViewById(choices.getCheckedRadioButtonId())))/2 ) {
-//            user got the question right! yay!
-//            toast = Toast.makeText(getApplicationContext(), "Yay you did a thing, I guess? meh.", Toast.LENGTH_SHORT);
+        try{
+            db.open();
 
-            //need to mark somewhere that the question was answered correctly
-        } else {
-//            user is WRONG WRONG WRONG OH MY GOODNESS SO SCARY <\3
-//            toast = Toast.makeText(getApplicationContext(), "WRONG OMG YOU\'RE WRONG HOW COULD YOU WE ALL BELIEVED IN YOU BUT NOW WE\'RE ATHEISTS!!!", Toast.LENGTH_SHORT);
+            db.addToHistory(currQuestion, userChoice);
+            Toast toast;
+            if(gotRight){
+                toast = Toast.makeText(getApplicationContext(), "Correct!", Toast.LENGTH_SHORT);
+            }else {
+                toast = Toast.makeText(getApplicationContext(), "Wrong :\'(", Toast.LENGTH_SHORT);
+            }
+
+            toast.show();
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
-//        toast = Toast.makeText(getApplicationContext(),
-//                "you checked " + choices.indexOfChild(choices.findViewById(choices.getCheckedRadioButtonId()))/2 + " and the answer was " + currQuestion.getAnswerIndex(),
-//                Toast.LENGTH_LONG);
-//        toast.show();
 
         writeRandomQuestion();
     }
-
-    /*
-
-    Don't need anymore
-
-    public String loadJSONFromAsset() {
-        String json;
-        try {
-
-            InputStream is = getAssets().open("questions.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            int rsz = is.read(buffer);
-
-            if(rsz <0 ){
-                //there is a big problem and I don't know what to do
-            }
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-
-    }
-    */
 
 }

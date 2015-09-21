@@ -46,6 +46,7 @@ public class Topic {
             e.printStackTrace();
         }
         qIndex = 0;
+        shuffledQs = questions;
         shuffleQuestions();
     }
 
@@ -53,6 +54,7 @@ public class Topic {
         this.questions = newQuestions;
         this.topic = topic;
         qIndex = 0;
+        shuffledQs = questions;
         shuffleQuestions();
     }
 
@@ -60,7 +62,6 @@ public class Topic {
         if(questions.size() < 1){
             throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
         }
-        shuffledQs = questions;
         Collections.shuffle(shuffledQs);
     }
 

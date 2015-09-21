@@ -1,11 +1,19 @@
 package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.ArrayList;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -21,6 +29,8 @@ public class TestActivity extends AppCompatActivity {
         initialize();
 
         startTest();
+
+        //testGraph();
     }
 
     @Override
@@ -46,10 +56,27 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void initialize(){
-        helloWorld = (TextView) findViewById(R.id.hello_world);
-        testText = (TextView) findViewById(R.id.testText);
+        //helloWorld = (TextView) findViewById(R.id.hello_world);
+        //testText = (TextView) findViewById(R.id.testText);
 
         db = new DBManager(this);
+    }
+
+    public void testGraph(){
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+
+
+        series.setColor(Color.RED);
+
+        graph.addSeries(series);
     }
 
     public void startTest(){
@@ -57,9 +84,15 @@ public class TestActivity extends AppCompatActivity {
             db.open();
 
             Question testQuestion = db.getQuestionsFromTopic("Hash Tables").get(0);
-            db.addToHistory(testQuestion, 0);
+            //db.addToHistory(testQuestion, 0);
 
-            db.getQuestionHistory(testQuestion);
+            ArrayList<ArrayList<History>> allHistoryTest = db.getTopicHistory("Hash Tables");
+
+            ArrayList<History> histories = db.getQuestionHistory(testQuestion);
+
+            for(History aHist : histories){
+                System.out.println(aHist.getDate());
+            }
 
             db.close();
         } catch (Exception e){

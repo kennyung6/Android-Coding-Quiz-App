@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,7 +179,7 @@ public class DBManager {
                 null, null, null, null);
 
         cursor.moveToFirst();
-        id = cursor.getColumnIndex(SQLiteDBHelper.ID_COL);
+        id = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.ID_COL));
         cursor.close();
 
         return id;
@@ -210,18 +211,42 @@ public class DBManager {
     }
 
 
-    public void getQuestionHistory(Question question){
+    public ArrayList<History> getQuestionHistory(Question question){
         int id = getQuestionID(question);
 
         Cursor cursor = db.query(
                 SQLiteDBHelper.HISTORY_TABLE_NAME,
-                new String[] {SQLiteDBHelper.USER_ANSW_COL, SQLiteDBHelper.GOT_RIGHT_COL},
-                SQLiteDBHelper.ID_COL + " = \"" + id + "\"",
+                new String[] {SQLiteDBHelper.USER_ANSW_COL, SQLiteDBHelper.GOT_RIGHT_COL, SQLiteDBHelper.DATE_COL},
+                SQLiteDBHelper.QUESTION_ID_COL + " = \"" + id + "\"",
                 null, null, null, null);
 
-        //TODO: make a "history" object that can store all this in an arraylist or something
+        cursor.moveToFirst();
+        ArrayList<History> qHistories = new ArrayList<>();
+        while(!cursor.isAfterLast()){
+            Timestamp newTimestamp = Timestamp.valueOf(
+                    cursor.getString(
+                    cursor.getColumnIndex(
+                    SQLiteDBHelper.DATE_COL)));
+            boolean newGotRight = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.GOT_RIGHT_COL))>0;
+            int newUserAnsw = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.USER_ANSW_COL));
+            qHistories.add(new History(newTimestamp, newGotRight, newUserAnsw));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return qHistories;
     }
 
+    public ArrayList<ArrayList<History>> getTopicHistory(String topicName){
+        //return getTopicHistory(getTopicID(topicName));
+        ArrayList<ArrayList<History>> topicHistory = new ArrayList<>();
+        List<Question> topicQuestions = getQuestionsFromTopic(topicName);
+        for(Question question : topicQuestions){
+            topicHistory.add(getQuestionHistory(question));
+        }
 
+        return topicHistory;
+    }
 
 }

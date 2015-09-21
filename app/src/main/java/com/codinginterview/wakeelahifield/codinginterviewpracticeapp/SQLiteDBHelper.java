@@ -13,7 +13,7 @@ import android.util.Log;
     public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "QuizDatabase.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
 
     //basic table information I need
     protected static final String TOPIC_TABLE_NAME = "TopicTable";
@@ -50,16 +50,18 @@ import android.util.Log;
 
     //HISTORY TABLE STRINGS & DEFINITIONS
     //this table is to track how well the user has been over the past whatever
-
     protected static final String HISTORY_TABLE_NAME = "HistoryTable";
     protected static final String QUESTION_ID_COL = "q_id";
     protected static final String USER_ANSW_COL = "user_answer";
+    protected static final String DATE_COL = "date";
     protected static final String GOT_RIGHT_COL = "got_right";
 
     private static final String CREATE_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS " + HISTORY_TABLE_NAME + "(" +
             ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_ANSW_COL + " INTEGER NOT NULL, " +
             GOT_RIGHT_COL + " INTEGER DEFAULT 0, " +
+            DATE_COL + " INTEGER DEFAULT CURRENT_TIMESTAMP, " +
+            QUESTION_ID_COL + " INTEGER, " +
             "FOREIGN KEY(" + QUESTION_ID_COL + ") REFERENCES " + QUESTION_TABLE_NAME + "(" + ID_COL + ")" +
             ");";
 

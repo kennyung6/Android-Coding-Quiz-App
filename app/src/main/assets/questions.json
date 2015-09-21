@@ -1,4 +1,35 @@
-[{
+[
+
+  {
+    "topic" : "Sorting",
+    "questions":[
+      {
+        "question" : "What is the worst case run time of quicksort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n^2)",
+          "O(2^n)"
+        ],
+        "answer" : 3
+      },
+      {
+       "question" : "What is the average run time of quicksort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n^2)",
+          "O(2^n)"
+        ],
+        "answer" : 2
+      }
+
+    ]
+  },
+
+  {
   "topic" : "Hash Tables",
   "questions": [
     {
