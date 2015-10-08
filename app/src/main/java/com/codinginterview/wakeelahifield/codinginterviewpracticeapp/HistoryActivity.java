@@ -55,13 +55,24 @@ public class HistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public int daysFromNow(Timestamp time){
-        Calendar start = Calendar.getInstance();
-        start.setTimeInMillis(time.getTime());
-        Calendar today = Calendar.getInstance();
+    public long daysFromNow(Timestamp time){
+//        Calendar start = Calendar.getInstance();
+//        start.setTimeInMillis(time.getTime());
+//        Calendar today = Calendar.getInstance();
+//
+//        int diff = today.compareTo(start);
+//        return diff;
 
-        int diff = today.compareTo(start);
-        return diff;
+        long milliseconds1 = time.getTime();
+        long milliseconds2 = new Timestamp(Calendar.getInstance().getTimeInMillis()).getTime();
+
+        long diff = milliseconds2 - milliseconds1;
+//        long diffSeconds = diff / 1000;
+        long diffMinutes = diff / (60 * 1000);
+//        long diffHours = diff / (60 * 60 * 1000);
+//        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        return diffMinutes;
     }
 
     public DataPoint[] convertHistoryArray(ArrayList<History> history){

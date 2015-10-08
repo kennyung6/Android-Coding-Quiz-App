@@ -13,7 +13,7 @@ import android.util.Log;
     public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "QuizDatabase.db";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 7;
 
     //basic table information I need
     protected static final String TOPIC_TABLE_NAME = "TopicTable";

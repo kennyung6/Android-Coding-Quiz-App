@@ -3,6 +3,7 @@ package com.codinginterview.wakeelahifield.codinginterviewpracticeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -116,11 +117,11 @@ public class QuestionsActivity extends AppCompatActivity {
         String[] choices = new String[currQuestion.getChoices().size()];
         choices = currQuestion.getChoices().toArray(choices);
 
-        a1.setText(choices[0]);
-        a2.setText(choices[1]);
-        a3.setText(choices[2]);
-        a4.setText(choices[3]);
-        a5.setText(choices[4]);
+        a1.setText(Html.fromHtml(choices[0]));
+        a2.setText(Html.fromHtml(choices[1]));
+        a3.setText(Html.fromHtml(choices[2]));
+        a4.setText(Html.fromHtml(choices[3]));
+        a5.setText(Html.fromHtml(choices[4]));
 
     }
 

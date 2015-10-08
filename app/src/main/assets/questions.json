@@ -4,27 +4,105 @@
     "topic" : "Sorting",
     "questions":[
       {
-        "question" : "What is the worst case run time of quicksort?",
+        "question" : "What is the worst-case run time of quicksort?",
         "choices" : [
           "O(1)",
           "O(n)",
           "O(n*log(n))",
-          "O(n^2)",
-          "O(2^n)"
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
         ],
         "answer" : 3
       },
       {
-       "question" : "What is the average run time of quicksort?",
+        "question" : "What is the average run time of quicksort?",
         "choices" : [
           "O(1)",
           "O(n)",
           "O(n*log(n))",
-          "O(n^2)",
-          "O(2^n)"
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 2
+      },
+      {
+        "question" : "What is the best-case run time of quicksort with a simple partition?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 2
+      },
+      {
+        "question" : "What is the best-case run time of quicksort with a three-way partition?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 1
+      },
+      {
+        "question" : "How can you make quicksort stable? A stable sort is if two items \"tie\" when compared, sorting will not change their original relative placement. Ex: [. . ., a1, . . ., a2, . . .] -> [. . ., a1, a2, . . .]",
+        "choices" : [
+          "It's impossible. Quicksort cannot be stable",
+          "Add an extra key to each element of its original place in the array, and use that as a tie-breaker when comparing elements.",
+          "Sort the whole array twice, first by one key, then by a second key.",
+          "Quicksort is supposed to be quick, not stable. You hurt my feelings.",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 1
+      },
+      {
+        "question" : "What is the average run time of HeapSort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 2
+      },
+      {
+        "question" : "What is the runtime to make a heap from N elements?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 1
+      },
+      {
+        "question" : "What is the runtime of mergesort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 2
+      },
+      {
+        "question" : "What is the space complexity of mergesort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
         ],
         "answer" : 2
       }
+
 
     ]
   },
@@ -59,8 +137,8 @@
       "choices" : [
         "I'll have to answer questions about them in interviews and this god forsaken app.",
         "When two hash tables collide at high speeds, they may create cancer-causing nano-hash-function particles.",
-        "You will have a slower insertion time. Worst case, it will be O(n^2).",
-        "You will have a slower insertion time. Worst case, it will be O(n).",
+        "You will have a slower insertion time. Worst case, inserting one item will be O(n^2).",
+        "You will have a slower insertion time. Worst case, inserting one item will be O(n).",
         "Your family will reject for you being a failure to humanity."
       ],
       "answer" : 3
@@ -86,6 +164,60 @@
         "It will take less time to find the entry"
       ],
       "answer" : 0
+    },
+    {
+      "question" : "What is quadratic probing, and why is it useful? (H = the hash value of the element.)",
+      "choices" : [
+        "It is an algorithm for handling collisions in hash tables, where you check H+1, H+2<sup>2</sup>, H+3<sup>2</sup>, ..., H+k<sup>2</sup> until you find an available slot.",
+        "It is a way to handle collisions, and you go down to the next available slot: H+1, H+2 etc. until one of them is empty.",
+        "It's what aliens do when they kidnap you and take you away. Ew, math.",
+        "It's a technique to handle collisions. You use a second, quadratic hash function, and use that to determine the slot. If that's not free, use a different hash function.",
+        "Hash tables use quadratic probing to determine if a value is missing."
+      ],
+      "answer" : 0
+    },
+    {
+      "question" : "What is the runtime of inserting into a hash table, on average?",
+      "choices" : [
+        "O(1)",
+        "O(n)",
+        "O(n*log(n))",
+        "O(n<sup>2</sup>)",
+        "O(2<sup>n</sup>)"
+      ],
+      "answer" : 0
+    },
+    {
+      "question" : "What is the worst-case runtime of inserting n elements into a hash table?",
+      "choices" : [
+        "O(1)",
+        "O(n)",
+        "O(n*log(n))",
+        "O(n<sup>2</sup>)",
+        "O(2<sup>n</sup>)"
+      ],
+      "answer" : 3
+    },
+    {
+      "questions" : "What is a bloom filter, and why would you need it?",
+      "choices" : [
+        "A bloom filter is a hash table with Flower objects during the spring.",
+        "A bloom filter is a hash table used to create false positives as a simulation in a stress test.",
+        "A bloom filter is a small hash table used to make sure attempted illegal entries do not get into a different, larger hash table.",
+        "A bloom filter is a large hash table with a variable amount of elements, used as a filter to eliminate entries that are illegal.",
+        "A bloom filter is a space-efficient hash table where a bit-array is used with multiple hash functions to test if an element is present in a set."
+      ]
+    },
+    {
+      "question" : "What is a major downside to hash tables?",
+      "choices" : [
+        "Hash tables cause computers to do extra work that is not necessary.",
+        "Hash tables cause computers to overheat because of their slothfulness.",
+        "Hash tables take up a lot of space, often using over 1,000 times the space used by, say, a binary tree.",
+        "Hash tables hate you. They want to slap you for not giving them ice cream.",
+        "The elements are not sorted, so if you need a list of the elements in order, you need a different data structure."
+      ],
+      "answer" : 1
     }
   ]
 }]
