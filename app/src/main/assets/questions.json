@@ -101,9 +101,68 @@
           "O(2<sup>n</sup>)"
         ],
         "answer" : 2
+      },
+      {
+        "question" : "How does insertion sort work?",
+        "choices" : [
+          "You insert each element into a data structure.",
+          "The algorithm prays to the evil gods that roam the world beneath us to tell it what to do with each element. Runtime is O(Higs Boson).",
+          "You traverse the array while swapping each pair of elements that are in the incorrect order. Repeat until sorted",
+          "Algorithmically, you take each element and swap it with the smallest element, rotating through to the largest, until you have sorted the elements.",
+          "The algorithm takes each element and inserts it into the correct position in an array or list."
+        ],
+        "answer" : 4
+      },
+      {
+        "question" : "What is the runtime of insertion sort?",
+        "choices" : [
+          "O(1)",
+          "O(n)",
+          "O(n*log(n))",
+          "O(n<sup>2</sup>)",
+          "O(2<sup>n</sup>)"
+        ],
+        "answer" : 3
+      },
+      {
+        "question" : "When might insertion sort be most useful?",
+        "choices" : [
+          "Insertion sort is never useful and should never be used.",
+          "Insertion sort is useful when you have a list or array already sorted and you only need to insert one element.",
+          "Insertion sort can be used to find out which computer scientist is the sexiest. They might be right next to you. Or very very far away. Either way, start running.",
+          "Insertion sort helps speed up other algorithms, like graph traversal or matrix multiplication.",
+          "Insertion sort be effecticely used as a base case for other sorting algorithms like mergesort when there are only a few elements left to sort, reducing recursive calls on the stack."
+        ],
+        "answer" : 4
       }
 
-
+    ]
+  },
+  {
+    "topic" : "Trees",
+    "questions" : [
+      {
+        "question" : "What is a Tree in computer science?",
+        "choices" : [
+          "A Tree is a recursive data structure where each \"root\" in the tree has K children, also trees themselves. Trees are grown in organic computers made entirely from natural ingredients.",
+          "A Tree is an iterative data structure where for each \"root\" in the tree, there are K children, also trees. Trees can die when they don't get enough water, so you must keep your computer well hydrated.",
+          "A Tree will hunt you down, wandering the land for eons until you are stuck in a tower and surrounded by these ent-like data types. Fear them.",
+          "Trees fear fire and bacteria. Use them wisely.",
+          "A tree is the recursive data structure described in the first option, but are not grown organically. Lots of pesticides are used to sanitize the data."
+        ],
+        "answer" : 4
+      },
+      {
+        "questions" : "What is a binary search tree (BST)?",
+        "choices" : [
+          "A BST is a tree where each node has 2 children. You can search for a node by asking which is the favorite child of the root, or parent.",
+          "A BST is a tree where each node is null.",
+          "A BST is a tree where each node has two children. The right child has a pointer less than the node itself, and the left pointer is the largest pointer.",
+          "A BST is a tree where each node has two children. The value of the left child in the smallest, and the right child has the largest value.",
+          "A BST is a tree with two children. The value of the left child is the greatest, and the right child has the least value."
+        ],
+        "answer" : 3
+      }
     ]
   },
 
