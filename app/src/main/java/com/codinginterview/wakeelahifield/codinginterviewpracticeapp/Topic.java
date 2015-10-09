@@ -30,7 +30,7 @@ public class Topic {
      * TODO: TEST THIS SHIT
      */
     public Topic (JSONObject jsonTopic) {
-        questions = new ArrayList<Question>();
+        questions = new ArrayList<>();
 
         try {
             topic = jsonTopic.getString("topic");
@@ -46,6 +46,7 @@ public class Topic {
             e.printStackTrace();
         }
         qIndex = 0;
+        shuffledQs = questions;
         shuffleQuestions();
     }
 
@@ -53,6 +54,7 @@ public class Topic {
         this.questions = newQuestions;
         this.topic = topic;
         qIndex = 0;
+        shuffledQs = questions;
         shuffleQuestions();
     }
 
@@ -60,7 +62,6 @@ public class Topic {
         if(questions.size() < 1){
             throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
         }
-        shuffledQs = questions;
         Collections.shuffle(shuffledQs);
     }
 
@@ -68,6 +69,12 @@ public class Topic {
         //for this, I'm not assuming questions is not empty. If it is empty, nothing will work but someone should find out somehow
         if(shuffledQs.size() <1){
             throw new IllegalStateException(NO_QUESTIONS_EXCEPTION);
+        }
+        if(qIndex>= shuffledQs.size()){
+            //throw new IllegalStateException(NO_MORE_QUESTIONS);
+            //that is so stupid why would I do such a thing omfg
+            shuffleQuestions();
+            qIndex = 0;
         }
         Question newQuestion = shuffledQs.get(qIndex);
         qIndex++;

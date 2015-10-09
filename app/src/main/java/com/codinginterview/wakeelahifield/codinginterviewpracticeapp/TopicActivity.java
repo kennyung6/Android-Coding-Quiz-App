@@ -21,6 +21,7 @@ import java.util.List;
 public class TopicActivity extends ListActivity {
 
     DBManager topicDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class TopicActivity extends ListActivity {
             //JSONObject questions = new JSONObject(json);
             JSONArray topics = new JSONArray(json);
 
-            List<Topic> topicList = new ArrayList<Topic>();
+            List<Topic> topicList = new ArrayList<>();
 
             for(int i = 0; i < topics.length(); i++){
                 //TODO: discuss if it is inneficient to make objects out of everything, then store them in the database... will I use the objects I make here? This seems like a waste...
@@ -91,7 +92,7 @@ public class TopicActivity extends ListActivity {
                 addTopicToDatabase(newTopic);
             }
 
-            ArrayAdapter<Topic> adapter = new ArrayAdapter<Topic>(this,
+            ArrayAdapter<Topic> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1, topicList);
             setListAdapter(adapter);
 
@@ -123,9 +124,9 @@ public class TopicActivity extends ListActivity {
             byte[] buffer = new byte[size];
             int readSize = is.read(buffer);
 
-            if(readSize <0 ){
-                //end of input stream
-            }
+//            if(readSize <0 ){
+//                //end of input stream
+//            }
             is.close();
 
             json = new String(buffer, "UTF-8");
@@ -142,7 +143,7 @@ public class TopicActivity extends ListActivity {
 
     public void addTopicToDatabase(Topic topic){
         DBManager topicDB = new DBManager(this);
-        //QuestionDBManager quesDB = new QuestionDBManager(this);
+
         try{
             //open database and make it possible to be used.
             // Also note these 2 lines are why we are in a try/catch

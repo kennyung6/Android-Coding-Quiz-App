@@ -24,6 +24,14 @@
             android:name=".QuestionsActivity"
             android:label="@string/title_activity_hash_table_questions" >
         </activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
     </application>
 
 </manifest>

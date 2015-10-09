@@ -23,4 +23,23 @@
         android:layout_below="@id/to_topics"
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toTest"
+        android:text="@string/to_test_button"
+        android:layout_below="@+id/to_settings"
+        android:onClick="to_test"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/historyButton"
+        android:text="@string/toHistoryButton"
+        android:onClick="toHistory"
+        android:layout_below="@+id/toTest"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
